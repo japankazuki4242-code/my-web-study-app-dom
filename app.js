@@ -30,7 +30,7 @@ function fullCode(item) {
 function frameSource(code) {
   // 練習は不透明な別オリジンで実行。親画面・メモ・外部通信にアクセスさせない。
   const policy = `<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; form-action 'none'; base-uri 'none'">`;
-  const reporter = `<script>window.addEventListener('error', function(e) { parent.postMessage({type:'dom-demo-error', message:e.message}, '*'); });<\/script>`;
+  const reporter = `<script>window.addEventListener('error', function(e) { parent.postMessage({type:'dom-demo-error', message:e.message}, '*'); }); document.addEventListener('click', function(e) { const link = e.target.closest('a'); if (!link) return; const href = link.getAttribute('href'); if (href && href.startsWith('#')) { e.preventDefault(); const target = document.getElementById(href.slice(1)); if (target) target.scrollIntoView(); } });<\/script>`;
   return policy + reporter + code;
 }
 function menu(href, title, detail = '') {
@@ -160,6 +160,10 @@ window.addEventListener('beforeunload', event => {
 document.querySelector('#back-button').addEventListener('click', () => {
   if (currentLesson) location.hash = previousRoute.startsWith('#dictionary') ? previousRoute : '#learn';
   else location.hash = '#home';
+});
+document.querySelector('.skip-link').addEventListener('click', event => {
+  event.preventDefault();
+  main.focus();
 });
 window.addEventListener('hashchange', () => {
   previousRoute = currentRoute;
