@@ -1,0 +1,486 @@
+/* 全ページ共通：すべての要素のサイズ計算 */
+* {
+  box-sizing: border-box;
+}
+
+/* 全ページ共通：ブラウザ標準UIのダークテーマ */
+html {
+  color-scheme: dark;
+}
+
+/* 全ページ共通：ページ本体とセーフエリア */
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0;
+  padding-top: calc(env(safe-area-inset-top) + 28px);
+  padding-right: calc(env(safe-area-inset-right) + 16px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+  padding-left: calc(env(safe-area-inset-left) + 16px);
+  background-color: #121212;
+  color: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+}
+
+/* 全ページ共通：本文の最大幅と中央配置 */
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* 全ページ共通：画面見出し */
+h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* トップ画面・一覧画面共通：メニューボタンの縦並び */
+.button-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* 一覧画面：複数グループの縦並び */
+.menu-section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+/* 一覧画面：グループ見出し */
+.menu-section-title {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.4;
+}
+
+/* 一覧画面：グループ見出し直後のボタン一覧 */
+.menu-section-title + .button-list {
+  margin-top: 12px;
+}
+
+/* トップ画面・一覧画面共通：メニューボタン */
+.menu-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 18px;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 16px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* トップ画面・一覧画面共通：メニューボタンのラベル */
+.menu-button > span:first-child {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* メニュー・固定下部ナビ共通：訪問済みリンクの文字色 */
+.menu-button:visited,
+.nav-button:visited {
+  color: #f5f5f5;
+}
+
+/* メニュー・固定下部ナビ共通：マウスを重ねた状態 */
+.menu-button:hover,
+.nav-button:hover {
+  background-color: #333333;
+}
+
+/* メニュー・固定下部ナビ共通：キーボードフォーカス */
+.menu-button:focus-visible,
+.nav-button:focus-visible {
+  outline: 3px solid #f5f5f5;
+  outline-offset: 3px;
+}
+
+/* メニュー・固定下部ナビ共通：押している状態 */
+.menu-button:active,
+.nav-button:active {
+  background-color: #242424;
+  transform: translateY(1px);
+}
+
+/* 固定下部ナビ付き画面共通：本文の重なり防止 */
+.page-with-bottom-nav {
+  padding-bottom: calc(90px + env(safe-area-inset-bottom));
+}
+
+/* 固定下部ナビ：画面下部への固定とセーフエリア */
+.bottom-nav {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  padding-top: 12px;
+  padding-right: calc(env(safe-area-inset-right) + 16px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
+  padding-left: calc(env(safe-area-inset-left) + 16px);
+  border-top: 1px solid #3a3a3a;
+  background-color: #121212;
+}
+
+/* 固定下部ナビ：BACK / TOPの横並び */
+.bottom-nav__inner {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* 固定下部ナビ：BACK / TOPボタン */
+.nav-button {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 10px 12px;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #2a2a2a;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 詳細画面：アコーディオンの縦並び */
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* JavaScript実践画面：STEPごとの教材グループ */
+.practice-step {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  background-color: #1d1d1d;
+}
+
+/* JavaScript実践画面：STEP番号・学習タイトル・PR番号 */
+.practice-step__header {
+  margin-bottom: 12px;
+  padding: 2px 2px 14px;
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.practice-step__number,
+.practice-step__title,
+.practice-step__pr {
+  margin: 0;
+}
+
+.practice-step__number {
+  color: #b8d4ff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.practice-step__title {
+  margin-top: 4px;
+  font-size: clamp(19px, 5.2vw, 22px);
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.practice-step__pr {
+  margin-top: 6px;
+  color: #b8b8b8;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* JavaScript実践画面：STEP内の折りたたみ項目 */
+.practice-step__details {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* 詳細画面：アコーディオン全体 */
+details {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #2a2a2a;
+}
+
+/* 詳細画面：アコーディオンの見出し */
+summary {
+  min-height: 56px;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+/* 詳細画面：アコーディオン見出しのホバー状態 */
+summary:hover {
+  background-color: #333333;
+}
+
+/* 詳細画面：アコーディオン見出しのキーボードフォーカス */
+summary:focus-visible {
+  outline: 3px solid #f5f5f5;
+  outline-offset: -3px;
+}
+
+/* 詳細画面：開いた見出しと本文の区切り */
+details[open] > summary {
+  border-bottom: 1px solid #3a3a3a;
+}
+
+/* 詳細画面：アコーディオンの本文 */
+.details-content {
+  padding: 16px 18px 18px;
+  line-height: 1.7;
+}
+
+/* 詳細画面：本文段落の基本余白 */
+.details-content p {
+  margin: 0;
+}
+
+/* 詳細画面：連続する本文段落の間隔 */
+.details-content p + p {
+  margin-top: 12px;
+}
+
+/* 詳細画面：コード例の表示枠 */
+pre {
+  max-width: 100%;
+  margin: 0 0 16px;
+  overflow-x: auto;
+  padding: 14px;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  background-color: #121212;
+}
+
+/* 詳細画面：末尾のコード例の余白調整 */
+pre:last-child {
+  margin-bottom: 0;
+}
+
+/* 詳細画面：コード文字 */
+code {
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* リセットCSS画面：Destyle公式リンク */
+.external-link {
+  color: #f5f5f5;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* リセットCSS画面：訪問済み公式リンクの文字色 */
+.external-link:visited {
+  color: #f5f5f5;
+}
+
+/* リセットCSS画面：Destyleコピー用ボタン */
+.copy-button {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+/* リセットCSS画面：コピー結果の表示欄 */
+.details-content .copy-status {
+  min-height: 1.7em;
+  margin-bottom: 12px;
+}
+
+/* 長いコード表示：Destyle全文・JavaScriptコードの縦横スクロール枠 */
+.destyle-code,
+.javascript-code {
+  max-height: 360px;
+  overflow: auto;
+}
+
+/* JavaScript学習ページ：比較表 */
+.comparison-table {
+  width: 100%;
+  margin: 12px 0 16px;
+  border-collapse: collapse;
+}
+
+/* JavaScript学習ページ：比較表の見出し・内容 */
+.comparison-table th,
+.comparison-table td {
+  padding: 10px;
+  overflow-wrap: anywhere;
+  border: 1px solid #3a3a3a;
+  text-align: left;
+  vertical-align: top;
+}
+
+/* JavaScript学習ページ：比較表の見出し背景 */
+.comparison-table th {
+  background-color: #121212;
+}
+
+/* JavaScript学習ページ：比較表内のコードを途中で折り返さない */
+.comparison-table code {
+  white-space: nowrap;
+}
+
+/* 自由メモ共通：入力欄・保存ボタン・結果表示の縦並び */
+.free-memo-area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* HTMLタグ詳細画面：アコーディオン内の自由メモの上余白 */
+.details-content .free-memo-area {
+  margin-top: 0;
+}
+
+/* 自由メモ共通：メモ入力欄 */
+.free-memo-input {
+  width: 100%;
+  min-height: 300px;
+  overflow-y: auto;
+  padding: 14px;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #121212;
+  color: #f5f5f5;
+  font: inherit;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+/* 自由メモ共通：メモ入力欄のキーボードフォーカス */
+.free-memo-input:focus-visible {
+  outline: 3px solid #f5f5f5;
+  outline-offset: 3px;
+}
+
+/* 自由メモ共通：保存ボタン */
+.free-memo-save-button {
+  flex: none;
+  width: 100%;
+}
+
+/* 自由メモ共通：保存結果 */
+.free-memo-status {
+  min-height: 1.7em;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* JavaScript実践画面：学習項目の入力欄 */
+.study-item-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1px solid #3a3a3a;
+  border-radius: 12px;
+  background-color: #121212;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* JavaScript実践画面：学習項目入力欄のキーボードフォーカス */
+.study-item-input:focus-visible {
+  outline: 3px solid #f5f5f5;
+  outline-offset: 3px;
+}
+
+/* JavaScript実践画面：学習項目一覧 */
+.study-item-list {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding-left: 0;
+  line-height: 1.7;
+  list-style: none;
+  overflow-wrap: anywhere;
+}
+
+/* JavaScript実践画面：チェックボックスと学習内容の横並び */
+.study-item-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* JavaScript実践画面：学習項目のチェックボックス */
+.study-item-list input[type="checkbox"] {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 2px 0 0;
+}
+
+/* JavaScript実践画面：長い学習内容の折り返し */
+.study-item-list span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* JavaScript実践画面：右端に置く削除ボタン */
+.study-item-delete-button {
+  flex: none;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #3a3a3a;
+  border-radius: 8px;
+  background-color: #242424;
+  color: #f5f5f5;
+  font: inherit;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.study-item-delete-button:focus-visible {
+  outline: 3px solid #f5f5f5;
+  outline-offset: 3px;
+}
+
+/* JavaScript実践画面：2件目以降の学習項目 */
+.study-item-list li + li {
+  margin-top: 8px;
+}
+
