@@ -20,7 +20,7 @@ https://japankazuki4242-code.github.io/my-web-study-app-dom/
 
 このリポジトリだけを編集・公開します。元のリポジトリや公開設定は変更しません。
 保存キーはすべて `my-web-study-app-dom:v1:` で始まります。元のアプリの保存キーを読み書きせず、localStorage.clear()も使いません。
-デモは `sandbox="allow-scripts"` のiframe内で実行し、同一オリジン権限を与えません。CSPで外部通信を禁止しています。
+デモは `sandbox="allow-scripts allow-forms"` のiframe内で実行し、同一オリジン権限を与えません。CSPで外部通信を禁止しています。
 
 ## メモについて
 
